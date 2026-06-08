@@ -61,9 +61,12 @@
         const teamStatsDiv = document.getElementById('teamStats');
         const matchesListDiv = document.getElementById('matchesList');
 
+        // URL de tu servidor en Render
+        const API_BASE_URL = 'https://fixturemundial2026-wtjl.onrender.com';
+
         window.addEventListener('DOMContentLoaded', async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/teams');
+                const response = await fetch(`${API_BASE_URL}/api/teams`);
                 const teams = await response.json();
                 select.innerHTML = '<option value="">-- Elegir País del Mundo --</option>';
                 teams.forEach(team => {
@@ -82,7 +85,7 @@
             }
 
             try {
-                const response = await fetch(`http://localhost:3000/api/fixture/${teamId}`);
+                const response = await fetch(`${API_BASE_URL}/api/fixture/${teamId}`);
                 const data = await response.json();
                 if (response.ok) renderDashboard(data);
             } catch (err) {
@@ -170,7 +173,7 @@
                             <div class="flex justify-around text-center gap-2">
                                 <div><span class="block font-black text-emerald-400 text-lg">${partido.historial.ganados}</span><span class="text-[9px] text-slate-500 uppercase font-bold">Ganó</span></div>
                                 <div><span class="block font-black text-slate-400 text-lg">${partido.historial.empatados}</span><span class="text-[9px] text-slate-500 uppercase font-bold">Empató</span></div>
-                                <div><span class="block font-black text-rose-500 text-lg">${partido.historial.perdidos}</span><span class="text-[9px] text-slate-500 uppercase font-bold">Perdió</span></div>
+                                <div><span class="block font-black text-rose-400 text-lg">${partido.historial.perdidos}</span><span class="text-[9px] text-slate-500 uppercase font-bold">Perdió</span></div>
                             </div>
                         </div>
                     </div>`;
