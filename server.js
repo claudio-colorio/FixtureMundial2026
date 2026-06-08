@@ -118,7 +118,15 @@ app.get('/api/fixture/:teamId', (req, res) => {
         partidos: fixture
     });
 });
+const path = require('path');
 
+// 1. Le dice a Express que la carpeta actual tiene archivos públicos (como el index.html)
+app.use(express.static(path.join(__dirname, './')));
+
+// 2. Le dice que cuando alguien entre a la raíz "/", le mande el archivo index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 app.listen(PORT, () => {
     console.log(`Servidor Oficial Mundial 2026 en http://localhost:${PORT}`);
 });
