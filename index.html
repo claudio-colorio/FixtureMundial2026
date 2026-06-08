@@ -135,7 +135,7 @@
             }
         }
 
-        function renderDashboard(data) {
+function renderDashboard(data) {
             wrapper.classList.remove('hidden');
 
             // Cuadros superiores estilo AFA Premium
@@ -164,8 +164,10 @@
             data.partidos.forEach(partido => {
                 const googleCalendarUrl = generateCalendarLink(data.seleccion, partido.rival, partido.fecha_art, partido.lugar);
 
-                // Calculamos el historial dinámico mezclando las siglas del equipo elegido y su rival
-                const h2h = calcularHistorialDinamico(data.datos.siglas, partido.rival_siglas || partido.rival.substring(0,3).toUpperCase());
+                // SOLUCIÓN ULTRA SEGURA: Usamos los nombres de texto directo para calcular el historial fijo
+                const nombreSeleccion = data.seleccion || "Local";
+                const nombreRival = partido.rival || "Visitante";
+                const h2h = calcularHistorialDinamico(nombreSeleccion, nombreRival);
 
                 matchesListDiv.innerHTML += `
                     <div class="bg-slate-900 text-white p-5 rounded-3xl shadow-xl border-l-8 border-sky-400 border-y border-r border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:scale-[1.01] transition-transform">
