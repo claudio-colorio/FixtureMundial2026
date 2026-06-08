@@ -66,14 +66,12 @@
         // FUNCIÓN MÁGICA: Genera un historial fijo y realista según las iniciales de los países
         function calcularHistorialDinamico(equipo1, equipo2) {
             if (!equipo1 || !equipo2 || equipo1 === equipo2) return { ganados: 0, empatados: 0, perdidos: 0 };
-            
-            // Creamos un código numérico único sumando las letras de ambos rivales
             const codigo = (equipo1 + equipo2).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
             
-            // Operaciones matemáticas simples para que los números den estables y creíbles
-            const ganados = codigo % 5; 
-            const perdidos = (codigo + 2) % 4;
-            const empatados = (codigo + 1) % 3;
+            // Forzamos a que de números lindos arriba de cero (por ejemplo, sumando 1)
+            const ganados = (codigo % 4) + 1; 
+            const perdidos = ((codigo + 2) % 3) + 1;
+            const empatados = (codigo % 2);
             
             return { ganados, empatados, perdidos };
         }
